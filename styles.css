@@ -1,0 +1,105 @@
+
+
+header {
+    background-color: #fbb04c;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+}
+
+body {
+    font-family: Verdana, sans-serif;
+    display: flex;
+    /* justify-content: auto;   */
+    align-items: center;
+    /* height: 100vh; */
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.body-wrapper {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;     
+    width: 100%;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    justify-content: top;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    text-align: center;
+    padding: 30px;
+}
+
+p {
+    color: #666;
+    text-align: center;
+}
+
+div.buttons {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    
+}
+
+button p{
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    justify-content: center;
+    color: white;
+    align-self: flex-end;
+}
+
+.home-button {
+    width: 284px;
+    height: 284px;
+    color: white;
+    font-family: verdana, sans-serif;
+    font-size: 36px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    padding: 10px;
+}
+
+.icon-image {
+    width: 158px;
+    height: 158px;
+}
+
+#lightbulb-icon {
+    width: 258px;
+    height: 158px;
+}
+
+button#cognitive-exercises {
+    background-color: #65ADF0;
+}
+
+button#lifestyle-tips {
+    background-color: #FD6E6E;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+button#cognitive-exercises:hover {
+    background-color: #42a5f5; 
+}
+
+button#lifestyle-tips:hover {
+    background-color: #f55a5a; 
+}
+
+
+

@@ -1,0 +1,15 @@
+{
+    "name": "Cognitive Exercise Tool",
+    "short_name": "CET",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "description": "A tool providing cognitive exercises and lifestyle tips for the elderly",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}
