@@ -14,7 +14,7 @@ body {
     align-items: center;
     /* height: 100vh; */
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: white;
 }
 
 .body-wrapper {
@@ -47,16 +47,23 @@ div.buttons {
     display: flex;
     justify-content: space-evenly;
     text-align: center;
-    
 }
 
-button p{
+a {
+    text-decoration: none;
+}
+a p{
     display: flex;
     flex-direction: column;
     margin-top: auto;
     justify-content: center;
     color: white;
     align-self: flex-end;
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
 }
 
 .home-button {
@@ -70,6 +77,26 @@ button p{
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
     padding: 10px;
+}
+
+.home-button:hover {
+    transform: scale(1.05);
+}
+
+#lifestyle-button {
+    background-color: #FD6E6E;
+}
+
+#lifestyle-button:hover {
+    background-color: #f55a5a;
+}
+
+#exercises-button {
+    background-color: #65ADF0;
+}
+
+#exercises-button:hover {
+    background-color: #42a5f5;
 }
 
 .icon-image {
