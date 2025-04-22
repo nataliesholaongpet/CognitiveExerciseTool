@@ -1,6 +1,7 @@
 
 
 header {
+    display: flex;
     background-color: #fbb04c;
     width: 100%;
     padding: 15px 0;
@@ -24,10 +25,22 @@ body {
     width: 100%;
 }
 
+.header-icon {
+    margin-left: 1rem;
+    z-index: 2;
+}
+
 h1 {
     color: white;
     text-align: center;
     justify-content: top;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
 }
 
 .content-wrapper {
@@ -67,16 +80,17 @@ a:visited {
 }
 
 .home-button {
-    width: 284px;
-    height: 284px;
+    width: 28vw;
+    height: 28vw;
+    margin: 0.977vw;
     color: white;
     font-family: verdana, sans-serif;
-    font-size: 36px;
+    font-size: 3.516vw;
     border-radius: 25px;
     border: none;
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
-    padding: 10px;
+    padding: 0.977vw;
 }
 
 .home-button:hover {
@@ -99,14 +113,22 @@ a:visited {
     background-color: #42a5f5;
 }
 
+#problem-button {
+    background-color: #6BCF5D;
+}
+
+#problem-button:hover {
+    background-color: #4FA943;
+}
+
 .icon-image {
-    width: 158px;
-    height: 158px;
+    width: 15.582vw;
+    height: 15.582vw;
 }
 
 #lightbulb-icon {
-    width: 258px;
-    height: 158px;
+    width: 25.444vw;
+    height: 15.582vw;
 }
 
 button#cognitive-exercises {
