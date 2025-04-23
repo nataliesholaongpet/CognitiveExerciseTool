@@ -9,4 +9,24 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    LifestyleTips();
+});
+
 // lifestyle tips section
+function LifestyleTips() {
+    const tips = ["Placeholder 1", "Placeholder 2", "Placeholder 3"];
+    const tipButton = document.getElementById('tipButton');
+    const tipText = document.getElementById('tipText');
+
+    function showRandomTip() {
+        const random = tips[Math.floor(Math.random() * tips.length)];
+        tipText.textContent = random;
+    }
+
+    if (tipButton && tipText) {
+        showRandomTip();
+    
+        tipButton.addEventListener('click', showRandomTip);
+      }
+}

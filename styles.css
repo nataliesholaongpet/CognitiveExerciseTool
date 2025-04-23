@@ -6,6 +6,7 @@ header {
     width: 100%;
     padding: 15px 0;
     text-align: center;
+    align-items: center;
 }
 
 body {
@@ -148,6 +149,44 @@ button#cognitive-exercises:hover {
 
 button#lifestyle-tips:hover {
     background-color: #f55a5a; 
+}
+
+.tip-container {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: 20.513vw;
+    margin-bottom: 0.493vw;
+    margin-top: 0.493vw;
+    border-radius: 25px;
+    background-color: #85DCA9;
+}
+
+.tip-container img {
+    filter: brightness(0) saturate(100%);
+}
+
+button#tipButton {
+    width: 80%;
+    height: 5vw;
+    border-radius: 25px;
+    border: none;
+    background-color: #34D376;
+    color: black;
+    font-family: Verdana;
+    font-size: 3.55vw;
+    transition: background-color 0.3s ease;
+}
+
+#tipButton:hover {
+    background-color: #28A85E;
+}
+
+#tipText {
+    font-family: Verdana;
+    font-size: 3.55vw;
+    color: black;
+    float: right;
 }
 
 
