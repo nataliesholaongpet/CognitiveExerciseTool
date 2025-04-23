@@ -189,5 +189,11 @@ button#tipButton {
     float: right;
 }
 
+h2 {
+    color: black;
+    font-family: Verdana;
+    font-size: 3.55vw;
+}
+
 
 

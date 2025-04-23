@@ -9,6 +9,14 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+if ('Notification' in window && navigator.serviceWorker) {
+    Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+            console.log('Notifications allowed');
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     LifestyleTips();
 });
