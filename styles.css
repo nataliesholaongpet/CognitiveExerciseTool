@@ -195,5 +195,97 @@ h2 {
     font-size: 3.55vw;
 }
 
+#reminderContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reminder-tab {
+    width: 80%;
+    height: 12vw;
+    text-align: center;
+    background-color: #85DCA9;
+    border-radius: 25px;
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+#addReminderButton {
+    width: 9.665vw;
+    height: 7.89vw; 
+    font-family: Verdana;
+    font-size: 3.55vw;
+    background-color: #85DCA9;
+    border-radius: 25px;
+    border: none;
+}
+
+#reminderForm {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.reminder-time {
+    width: 14.821vw;
+    height: 8.903vw;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    background-color: #98F9C0;
+    font-family: Verdana;
+    font-size: 3.55vw;
+    color: black;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#reminderTime {
+    width: 21.696vw;
+    height: 5.325vw;
+    margin: 0.986vw;
+    border-radius: 25px;
+    border: 0.986vw solid #85DCA9;
+    background-color: #98F9C0;
+    color: black;
+    font-family: verdana;
+    font-size: 20px;
+}
+
+.reminder-text {
+    font-family: Verdana;
+    font-weight: bold;
+    font-size: 3.55vw;
+    color: black;
+}
+
+#reminderText {
+    width: 25.049vw;
+    height: 5.325vw;
+    margin: 0.986vw;
+    border-radius: 25px;
+    border: 10px solid #85DCA9;
+    background-color: #98F9C0;
+    font-family: Verdana;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+}
+
+#saveReminder {
+    width: 194px;
+    height: 54px;
+    margin: 0.986vw;
+    border-radius: 25px;
+    border: none;
+    color: black;
+    font-family: verdana;
+    font-size: 20px;
+    background-color: #85DCA9;
+}
+
 
 

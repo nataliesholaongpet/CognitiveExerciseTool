@@ -21,6 +21,87 @@ document.addEventListener('DOMContentLoaded', () => {
     LifestyleTips();
 });
 
+const addReminderButton = document.getElementById('addReminderButton');
+const reminderForm = document.getElementById('reminderForm');
+
+addReminderButton.addEventListener('click', () => {
+    const isVisible = reminderForm.style.display === 'block';
+    reminderForm.style.display = isVisible ? 'none' : 'block';
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadReminders();
+
+    document.getElementById('addReminderBtn').addEventListener('click', () => {
+        document.getElementById('reminderForm').style.display = 'block';
+    });
+
+    document.getElementById('saveReminder').addEventListener('click', () => {
+        if (Notification.permission !== 'granted') {
+            Notification.requestPermission();
+        }
+
+        const time = new Date(document.getElementById('reminderTime').value);
+        const text = document.getElementById('reminderText').value;
+        const id = Date.now();
+
+        const reminder = { id, time: time.toISOString(), text };
+
+        saveReminder(reminder);
+        schedulePushNotification(reminder);
+        document.getElementById('reminderForm').style.display = 'none';
+        renderReminder(reminder);
+    });
+});
+
+function saveReminder(reminder) {
+    const reminders = JSON.parse(localStorage.getItem('reminders') || '[]');
+    reminders.push(reminder);
+    localStorage.setItem('reminders', JSON.stringify(reminders));
+}
+
+function loadReminders() {
+    const reminders = JSON.parse(localStorage.getItem('reminders') || '[]');
+    if (reminders.length === 0) {
+        document.getElementById('reminderContainer').innerHTML = '';
+        return;
+    }
+    reminders.forEach(renderReminder);
+}
+
+function renderReminder({ time, text }) {
+    const dateObj = new Date(time);
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    const hours = String(dateObj.getHours()).padStart(2, '0');
+    const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+
+    const formattedDate = `${day}/${month}`;
+    const formattedTime = `${hours}:${minutes}`;
+
+    const container = document.getElementById('reminderContainer');
+    const reminderDiv = document.createElement('div');
+    reminderDiv.className = 'reminder-tab';
+    reminderDiv.innerHTML = `<span class="reminder-time"><strong>${formattedDate}</strong> <strong>${formattedTime}</strong></span><span class="reminder-text">${text}</span>`;
+    container.appendChild(reminderDiv);
+}
+
+function schedulePushNotification(reminder) {
+    const delay = new Date(reminder.time).getTime() - Date.now();
+    if (delay > 0) {
+        setTimeout(() => {
+            if (Notification.permission === 'granted') {
+                navigator.serviceWorker.ready.then(reg => {
+                    reg.showNotification("Lifestyle Reminder", {
+                        body: reminder.text,
+                        icon: '/icon.png'
+                    });
+                });
+            }
+        }, delay);
+    }
+}
+
 // lifestyle tips section
 function LifestyleTips() {
     const tips = ["Placeholder 1", "Placeholder 2", "Placeholder 3"];

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="placeholder-icon" href="placeholder-icon.jpg">
+    <link rel="apple-touch-icon" href="placeholder-icon.jpg">
     <link rel="manifest" href="manifest.json">
     <title>Lifestyle Tips</title>
     <link rel="stylesheet" href="styles.css">
@@ -23,6 +23,15 @@
     <button id="tipButton">Refresh</button>
 
     <h2>Set Reminders</h2>
+
+    <div id="reminderContainer"></div>
+
+<button id="addReminderButton">+</button>
+    <div id="reminderForm" style="display:none">
+    <input title ="Reminder Time" type="datetime-local" id="reminderTime" />
+    <textarea id="reminderText" placeholder="Enter reminder text"></textarea>
+    <button id="saveReminder">Set Reminder</button>
+    </div>
     <script src="app.js"></script>
 </body>
 </div>

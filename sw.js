@@ -22,7 +22,7 @@ self.addEventListener('fetch', event => {
 });
 
 self.addEventListener('push', event => {
-    let data = { title: 'Reminder', body: 'Time for your cognitive exercise!', icon: '/placeholder-icon.jpg' };
+    let data = { title: 'Reminder', body: 'Time for your cognitive exercise!', icon: '/placeholder-icon.jpg'};
 
     if (event.data) {
         try {
