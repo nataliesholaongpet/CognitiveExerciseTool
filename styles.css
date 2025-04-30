@@ -287,5 +287,72 @@ h2 {
     background-color: #85DCA9;
 }
 
+.music-card {
+    height: 22.584vw;
+    width: 22.584vw;
+    background-color: #85DCA9;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    right: 10%;
+}
+
+.album-art {
+    height: 14.3vw;
+    width: 14.3vw;
+    margin: 0.986vw;
+}
+
+.controls {
+    margin-bottom: 10px;
+}
+  
+#playButton, #pauseButton, #nextButton {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: grey;
+}
+  
+.progress-container {
+    position: relative;
+    height: 20px;
+}
+  
+#progressBar {
+    width: 100%;
+    appearance: none;
+    height: 6px;
+    background: #ccc;
+    border-radius: 3px;
+    outline: none;
+}
+
+.progress {
+    height: 6px;
+    background-color: black;
+    width: 0%;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+  
+.thumb {
+    width: 16px;
+    height: 16px;
+    background-color: #ddd;
+    border-radius: 50%;
+    position: absolute;
+    top: -5px;
+    left: 0%;
+    transform: translateX(-50%);
+}
+  
+
+
 
 

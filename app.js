@@ -32,7 +32,7 @@ addReminderButton.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
     loadReminders();
 
-    document.getElementById('addReminderBtn').addEventListener('click', () => {
+    document.getElementById('addReminderButton').addEventListener('click', () => {
         document.getElementById('reminderForm').style.display = 'block';
     });
 
@@ -102,6 +102,43 @@ function schedulePushNotification(reminder) {
     }
 }
 
+const music = new Audio('all-good-things.mp3');
+
+document.getElementById('playButton').addEventListener('click', () => {
+  music.play();
+});
+
+document.getElementById('pauseButton').addEventListener('click', () => {
+  music.pause();
+});
+
+let currentTrack = 0;
+const audio = document.getElementById('audioPlayer'); // Your <audio> element
+
+function playTrack(index) {
+  audio.src = playlist[index];
+  audio.play();
+}
+
+document.getElementById('nextButton').addEventListener('click', () => {
+  currentTrack = (currentTrack + 1) % playlist.length;
+  playTrack(currentTrack);
+});
+
+const progressBar = document.getElementById('progressBar');
+
+audio.addEventListener('loadedmetadata', () => {
+    progressBar.max = Math.floor(audio.duration);
+});
+
+audio.addEventListener('timeupdate', () => {
+    progressBar.value = Math.floor(audio.currentTime);
+});
+
+progressBar.addEventListener('input', () => {
+    audio.currentTime = progressBar.value;
+});
+
 // lifestyle tips section
 function LifestyleTips() {
     const tips = ["Placeholder 1", "Placeholder 2", "Placeholder 3"];
@@ -118,4 +155,5 @@ function LifestyleTips() {
     
         tipButton.addEventListener('click', showRandomTip);
       }
+
 }
