@@ -2,6 +2,16 @@ const cardSymbols = ['🍎','🍌','🍇','🍊','🍓','🍉','🍍','🥝'];
 let cards = [...cardSymbols, ...cardSymbols];
 let firstCard = null;
 let secondCard = null;
+let score = 0;
+let currentDifficultyIndex = 0; 
+let lockBoard = false;
+
+const difficulties = ['easy', 'medium', 'hard'];
+const difficultyPairs = {
+  easy: 4,    
+  medium: 6,  
+  hard: 8     
+};
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -18,6 +28,7 @@ function createCard(symbol) {
 
   div.addEventListener('click', () => {
     if (div.classList.contains('flipped') || div.classList.contains('matched')) return;
+    if (lockBoard) return;
 
     div.classList.add('flipped');
     div.textContent = symbol;
@@ -34,10 +45,15 @@ function createCard(symbol) {
 }
 
 function checkMatch() {
+    lockBoard = true;
+
   if (firstCard.dataset.symbol === secondCard.dataset.symbol) {
     firstCard.classList.add('matched');
     secondCard.classList.add('matched');
+    updateScore();
     resetFlips();
+    checkForWin();
+    lockBoard = false;
   } else {
     setTimeout(() => {
       firstCard.classList.remove('flipped');
@@ -45,6 +61,7 @@ function checkMatch() {
       firstCard.textContent = '';
       secondCard.textContent = '';
       resetFlips();
+      lockBoard = false;
     }, 1000);
   }
 }
@@ -54,12 +71,61 @@ function resetFlips() {
   secondCard = null;
 }
 
-function initGame() {
-  shuffle(cards);
-  const board = document.getElementById('gameBoard');
-  cards.forEach(symbol => {
-    board.appendChild(createCard(symbol));
-  });
+function updateScore() {
+  score++;
+  document.getElementById('score').textContent = `Score: ${score}`;
 }
 
-initGame();
+function checkForWin() {
+    const allMatched = document.querySelectorAll('.card.matched').length === cards.length;
+    if (allMatched) {
+      setTimeout(() => {
+        advanceDifficulty();
+      }, 1000);
+    }
+}
+
+function showLevelPopup(message, callback) {
+    const popup = document.getElementById('levelPopup');
+    const popupText = document.getElementById('popupText');
+    const popupButton = document.getElementById('popupButton');
+  
+    popupText.textContent = message;
+    popup.classList.remove('hidden');
+  
+    popupButton.onclick = () => {
+      popup.classList.add('hidden');
+      if (callback) callback();
+    };
+}
+
+function advanceDifficulty() {
+    if (currentDifficultyIndex < difficulties.length - 1) {
+      currentDifficultyIndex++;
+      const nextLevel = difficulties[currentDifficultyIndex];
+      showLevelPopup(`Well done! Moving to ${nextLevel.toUpperCase()} level!`)
+      initGame(nextLevel);
+    } else {
+      showLevelPopup('Congratulations! You completed all levels!');
+      currentDifficultyIndex = 0;
+      initGame('easy');
+    }
+}
+
+function initGame(level) {
+    const numPairs = difficultyPairs[level];
+    const selectedSymbols = cardSymbols.slice(0, numPairs);
+    cards = [...selectedSymbols, ...selectedSymbols];
+    shuffle(cards);
+  
+    const board = document.getElementById('gameBoard');
+    board.innerHTML = '';
+  
+    cards.forEach(symbol => {
+      board.appendChild(createCard(symbol));
+    });
+  
+    score = 0;
+}
+
+initGame('easy');

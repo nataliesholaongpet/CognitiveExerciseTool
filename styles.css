@@ -360,6 +360,7 @@ h2 {
     grid-gap: 10px;
     position: absolute;
     top: 25%;
+    margin-top: 1.972vw;
 }
 
 .card {
@@ -385,4 +386,46 @@ h2 {
 .card.matched {
     background: #1d924f;
     pointer-events: none;
+}
+
+#score {
+    font-family: verdana;
+    font-size: 36px;
+    margin: 5px;
+    color: black;
+    border: solid black;
+    padding: 0.986vw;
+    background-color: lightgrey;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #34D376;
+    color: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+}
+
+.popup.hidden {
+    display: none;
+}
+
+#popupButton {
+    margin-top: 10px;
+    background: white;
+    color: #34D376;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#popupButton:hover {
+    background: #f0f0f0;
 }
