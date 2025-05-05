@@ -395,7 +395,8 @@ h2 {
     color: black;
     border: solid black;
     padding: 0.986vw;
-    background-color: lightgrey;
+    background-color: #34D376;
+    border-radius: 25px;
 }
 
 .popup {
@@ -428,4 +429,32 @@ h2 {
 
 #popupButton:hover {
     background: #f0f0f0;
+}
+
+
+#gameArea {
+    position: relative;
+    width: 90vw;
+    height: 70vh;
+    margin: 0 auto;
+    border: 2px solid #333;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    border: none;
+    border-radius: 25px;
+    background-color: #8EF580;
+}
+
+.target {
+    width: 50px;
+    height: 50px;
+    background-color: orange;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.target:hover {
+    transform: scale(1.2);
 }

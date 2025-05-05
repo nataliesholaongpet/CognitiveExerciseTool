@@ -1,3 +1,5 @@
+const CACHE_NAME = 'v2';
+
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open('v2').then(cache => {
@@ -13,11 +15,11 @@ self.addEventListener('install', event => {
                 '/Lifestyle Tips.html',
                 '/lightbulb-icon.png',
                 '/magnifying-glass.png',
-                '/Memory Card Game.png',
+                '/Memory Card Game.html',
                 '/memory-game.js',
                 '/placeholder.png',
                 '/puzzle-piece.png',
-                '/though-bubble.png',
+                '/thought-bubble.png',
             ]);
         })
     );
@@ -35,7 +37,7 @@ self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(keys => {
             return Promise.all(
-                keys.filter(key => key !== 'v2').map(key => caches.delete(key))
+                keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
             );
         })
     );
