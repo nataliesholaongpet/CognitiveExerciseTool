@@ -1,11 +1,11 @@
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load' , () => {
+    window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
-                  .then(registration => {
-            console.log('Service Worker registered with scope:' , registration.scope);
-        }).catch(error => {
-            console.log('Service Worker registration failed:' , error);
-        });
+            .then(registration => {
+                console.log('Service Worker registered with scope:', registration.scope);
+            }).catch(error => {
+                console.log('Service Worker registration failed:', error);
+            });
     });
 }
 
@@ -105,24 +105,24 @@ function schedulePushNotification(reminder) {
 const music = new Audio('all-good-things.mp3');
 
 document.getElementById('playButton').addEventListener('click', () => {
-  music.play();
+    music.play();
 });
 
 document.getElementById('pauseButton').addEventListener('click', () => {
-  music.pause();
+    music.pause();
 });
 
 let currentTrack = 0;
 const audio = document.getElementById('audioPlayer'); // Your <audio> element
 
 function playTrack(index) {
-  audio.src = playlist[index];
-  audio.play();
+    audio.src = playlist[index];
+    audio.play();
 }
 
 document.getElementById('nextButton').addEventListener('click', () => {
-  currentTrack = (currentTrack + 1) % playlist.length;
-  playTrack(currentTrack);
+    currentTrack = (currentTrack + 1) % playlist.length;
+    playTrack(currentTrack);
 });
 
 const progressBar = document.getElementById('progressBar');
@@ -144,6 +144,7 @@ function LifestyleTips() {
     const tips = ["Placeholder 1", "Placeholder 2", "Placeholder 3"];
     const tipButton = document.getElementById('tipButton');
     const tipText = document.getElementById('tipText');
+    const speakButton = document.getElementById('speakButton');
 
     function showRandomTip() {
         const random = tips[Math.floor(Math.random() * tips.length)];
@@ -152,8 +153,14 @@ function LifestyleTips() {
 
     if (tipButton && tipText) {
         showRandomTip();
-    
-        tipButton.addEventListener('click', showRandomTip);
-      }
 
-}
+        tipButton.addEventListener('click', showRandomTip);
+    }
+
+    speakButton.addEventListener('click', () => {
+        const tts = new SpeechSynthesisUtterance(tipText.textContent);
+        speechSynthesis.speak(tts);
+
+
+    }
+)}

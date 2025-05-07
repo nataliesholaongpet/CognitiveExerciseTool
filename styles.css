@@ -160,6 +160,7 @@ button#lifestyle-tips:hover {
     margin-top: 0.493vw;
     border-radius: 25px;
     background-color: #85DCA9;
+    justify-content: space-between;
 }
 
 .tip-container img {
@@ -457,4 +458,17 @@ h2 {
 
 .target:hover {
     transform: scale(1.2);
+}
+
+#speakButton {
+    background: none;
+    border: none;
+    font-size: 1.5rem; 
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+#speaking-icon {
+    height: 50px;
+    width: 50px;
 }
