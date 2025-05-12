@@ -11,14 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const popup = document.getElementById('infoPopup');
   const popupButton = document.getElementsByClassName('popupButton')[0];
   const infoPopupButton = document.getElementsByClassName('showInfoPopup')[0];
+  const overlay = document.getElementsByClassName('popupOverlay')[0];
 
   popupButton.addEventListener('click', () => {
     popup.style.display = 'none';
+    overlay.classList.add('hidden');
   });
 
   infoPopupButton.addEventListener('click', () => {
     popup.style.display = 'block';
-
+    overlay.classList.remove('hidden');
   });
 });
 
