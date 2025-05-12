@@ -1,11 +1,11 @@
-const CACHE_NAME = 'v2';
+const CACHE_NAME = 'v3';
 
 self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open('v2').then(cache => {
+        caches.open('v3').then(cache => {
             return cache.addAll([
                 '/',
-                '/Cognitive Exercise Tool.html',
+                '/index.html',
                 '/styles.css',
                 '/app.js',
                 '/manifest.json',
@@ -20,6 +20,7 @@ self.addEventListener('install', event => {
                 '/placeholder.png',
                 '/puzzle-piece.png',
                 '/thought-bubble.png',
+                '/brain-icon.png'
             ]);
         })
     );

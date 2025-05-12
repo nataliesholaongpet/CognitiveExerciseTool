@@ -1,16 +1,16 @@
-const cardSymbols = ['🍎','🍌','🍇','🍊','🍓','🍉','🍍','🥝'];
+const cardSymbols = ['🍎', '🍌', '🍇', '🍊', '🍓', '🍉', '🍍', '🥝'];
 let cards = [...cardSymbols, ...cardSymbols];
 let firstCard = null;
 let secondCard = null;
 let score = 0;
-let currentDifficultyIndex = 0; 
+let currentDifficultyIndex = 0;
 let lockBoard = false;
 
 const difficulties = ['easy', 'medium', 'hard'];
 const difficultyPairs = {
-  easy: 4,    
-  medium: 6,  
-  hard: 8     
+  easy: 4,
+  medium: 6,
+  hard: 8
 };
 
 function shuffle(array) {
@@ -45,7 +45,7 @@ function createCard(symbol) {
 }
 
 function checkMatch() {
-    lockBoard = true;
+  lockBoard = true;
 
   if (firstCard.dataset.symbol === secondCard.dataset.symbol) {
     firstCard.classList.add('matched');
@@ -77,55 +77,70 @@ function updateScore() {
 }
 
 function checkForWin() {
-    const allMatched = document.querySelectorAll('.card.matched').length === cards.length;
-    if (allMatched) {
-      setTimeout(() => {
-        advanceDifficulty();
-      }, 1000);
-    }
+  const allMatched = document.querySelectorAll('.card.matched').length === cards.length;
+  if (allMatched) {
+    setTimeout(() => {
+      advanceDifficulty();
+    }, 1000);
+  }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const popup = document.getElementById('infoPopup');
+  const popupButton = document.getElementsByClassName('popupButton')[0];
+  const infoPopupButton = document.getElementsByClassName('showInfoPopup')[0];
+
+  popupButton.addEventListener('click', () => {
+    popup.style.display = 'none';
+  });
+
+  infoPopupButton.addEventListener('click', () => {
+    popup.style.display = 'block';
+
+  });
+});
+
 function showLevelPopup(message, callback) {
-    const popup = document.getElementById('levelPopup');
-    const popupText = document.getElementById('popupText');
-    const popupButton = document.getElementById('popupButton');
-  
-    popupText.textContent = message;
-    popup.classList.remove('hidden');
-  
-    popupButton.onclick = () => {
-      popup.classList.add('hidden');
-      if (callback) callback();
-    };
+  const popup = document.getElementById('levelPopup');
+  const popupText = document.getElementsByClassName('popupText')[1];
+  const popupButton = document.getElementsByClassName('popupButton')[1];
+
+  popupText.textContent = message;
+  popup.classList.remove('hidden');
+
+  popupButton.onclick = () => {
+    popup.classList.add('hidden');
+    if (callback) callback();
+  };
 }
 
 function advanceDifficulty() {
-    if (currentDifficultyIndex < difficulties.length - 1) {
-      currentDifficultyIndex++;
-      const nextLevel = difficulties[currentDifficultyIndex];
-      showLevelPopup(`Well done! Moving to ${nextLevel.toUpperCase()} level!`)
-      initGame(nextLevel);
-    } else {
-      showLevelPopup('Congratulations! You completed all levels!');
-      currentDifficultyIndex = 0;
-      initGame('easy');
-    }
+  if (currentDifficultyIndex < difficulties.length - 1) {
+    currentDifficultyIndex++;
+    const nextLevel = difficulties[currentDifficultyIndex];
+    showLevelPopup(`Well done! Moving to ${nextLevel.toUpperCase()} level!`)
+    initGame(nextLevel);
+  } else {
+    showLevelPopup('Congratulations! You completed all levels!');
+    currentDifficultyIndex = 0;
+    initGame('easy');
+  }
 }
 
 function initGame(level) {
-    const numPairs = difficultyPairs[level];
-    const selectedSymbols = cardSymbols.slice(0, numPairs);
-    cards = [...selectedSymbols, ...selectedSymbols];
-    shuffle(cards);
-  
-    const board = document.getElementById('gameBoard');
-    board.innerHTML = '';
-  
-    cards.forEach(symbol => {
-      board.appendChild(createCard(symbol));
-    });
-  
-    score = 0;
+  const numPairs = difficultyPairs[level];
+  const selectedSymbols = cardSymbols.slice(0, numPairs);
+  cards = [...selectedSymbols, ...selectedSymbols];
+  shuffle(cards);
+
+  const board = document.getElementById('gameBoard');
+  board.innerHTML = '';
+
+  cards.forEach(symbol => {
+    board.appendChild(createCard(symbol));
+  });
+
+  score = 0;
 }
 
 initGame('easy');

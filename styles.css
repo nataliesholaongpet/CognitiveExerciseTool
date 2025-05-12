@@ -418,7 +418,7 @@ h2 {
     display: none;
 }
 
-#popupButton {
+.popupButton {
     margin-top: 10px;
     background: white;
     color: #34D376;
@@ -428,8 +428,26 @@ h2 {
     cursor: pointer;
 }
 
-#popupButton:hover {
+.popupButton:hover {
     background: #f0f0f0;
+}
+
+.score-tab {
+    display: flex;
+    align-items: center;
+}
+
+.showInfoPopup {
+    width: 4.931vw;
+    height: 4.931vw;
+    position: absolute;
+    right: 5%;
+    border-radius: 25px;
+    border: solid black;
+    background-color: #34D376;
+    font-family: Verdana;
+    font-size: 36px;
+    font-weight: bold;
 }
 
 
