@@ -7,6 +7,21 @@ let gameEndTime;
 let targetAppearTime;
 let gameActive = false;
 
+document.addEventListener('DOMContentLoaded', () => {
+  const popup = document.getElementById('infoPopup');
+  const popupButton = document.getElementsByClassName('popupButton')[0];
+  const infoPopupButton = document.getElementsByClassName('showInfoPopup')[0];
+
+  popupButton.addEventListener('click', () => {
+    popup.style.display = 'none';
+  });
+
+  infoPopupButton.addEventListener('click', () => {
+    popup.style.display = 'block';
+
+  });
+});
+
 function createTarget() {
   if (!gameActive) return;
 

@@ -13,20 +13,27 @@
 
 <div class="body-wrapper">
 
-<body>
-    <header>
-        <a href="index.html" class="header-button">
-            <img src="home.png" alt="Home Icon" class="header-icon">
-        </a>
-        <h1>Target Click Game</h1>
-    </header>
+    <body>
+        <header>
+            <a href="index.html" class="header-button">
+                <img src="home.png" alt="Home Icon" class="header-icon">
+            </a>
+            <h1>Target Click Game</h1>
+        </header>
 
-    <h1>Click the Circles!</h1>
-    <p id="score">Time left: 30s</p>
-    <div id="gameArea"></div>
+        <div id="infoPopup" class="popup">
+            <p class="popupText">Tap on circles as quick as you can<br>Average speed will get calculated at the end</p>
+            <button class="popupButton">OK</button>
+        </div>
 
-    <script src="target-click-game.js"></script>
-</body>
+        <div class="score-tab">
+            <p id="score">Time left: 30s</p>
+            <button class="showInfoPopup">?</button>
+        </div>
+        <div id="gameArea"></div>
+
+        <script src="target-click-game.js"></script>
+    </body>
 
 </div>
 
