@@ -164,3 +164,24 @@ function LifestyleTips() {
 
     }
 )}
+
+document.getElementById('saveReminder').addEventListener('click', () => {
+        if (!("Notification" in window)) {
+        alert("This system does not support push notifications");
+        return;
+    }
+
+    if (Notification.permission === "granted") {
+        alert("Notifications are already enabled.");
+    } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                new Notification("Notifications enabled!");
+            } else {
+                alert("Notifications denied.");
+            }
+        });
+    } else {
+        alert("Notifications are blocked. Please enable them in your app settings.");
+    }
+});
