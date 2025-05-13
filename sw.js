@@ -1,8 +1,8 @@
-const CACHE_NAME = 'v3';
+const CACHE_NAME = 'v4';
 
 self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open('v3').then(cache => {
+        caches.open('v4').then(cache => {
             return cache.addAll([
                 '/',
                 '/index.html',
