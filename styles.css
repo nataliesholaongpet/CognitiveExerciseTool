@@ -236,8 +236,8 @@ h2 {
     justify-content: space-between;
     gap: 10px;
     margin-bottom: 20px;
-    flex-wrap: wrap;
     margin: 20px;
+    width: 80%;
 }
 
 .reminder-time {
@@ -262,11 +262,13 @@ h2 {
 #reminderTime,
 #reminderText {
     padding: 10px;
-    font-size: 1rem;
+    font-size: 1.5rem;
     border: 2px solid black;
     border-radius: 12px;
     flex: 1;
     min-width: 45%;
+    font-family: 'Inter', Verdana, sans-serif;
+    font-weight: bold;
 }
 
 #saveReminder {
@@ -274,11 +276,20 @@ h2 {
     color: white;
     border: none;
     padding: 12px 0;
-    width: 100%;
+    width: 45%;
     border-radius: 25px;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: bold;
     cursor: pointer;
+    margin-bottom: 20px;
+    font-family: 'Inter', Verdana, sans-serif;
+    font-weight: bold;
+}
+
+.music-player-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .music-card {
@@ -288,9 +299,9 @@ h2 {
     border-radius: 25px;
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
-    position: absolute;
-    right: 10%;
+    margin-bottom: 20px;
 }
 
 .album-art {
@@ -322,7 +333,7 @@ h2 {
     width: 100%;
     appearance: none;
     height: 6px;
-    background: #ccc;
+    background: black;
     border-radius: 3px;
     outline: none;
 }
@@ -340,7 +351,7 @@ h2 {
 .thumb {
     width: 16px;
     height: 16px;
-    background-color: #ddd;
+    background-color: #ccc;
     border-radius: 50%;
     position: absolute;
     top: -5px;
@@ -512,4 +523,9 @@ h2 {
     height: 100%;
     background: linear-gradient(to right, #007fed, #00c6ff);
     margin: 20px;
+}
+
+.control-buttons {
+    width: 4vw;
+    height: 4vw;
 }
