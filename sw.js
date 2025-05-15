@@ -1,8 +1,8 @@
-const CACHE_NAME = 'v4';
+const CACHE_NAME = 'v5';
 
 self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open('v4').then(cache => {
+        caches.open('v5').then(cache => {
             return cache.addAll([
                 '/',
                 '/index.html',
@@ -20,7 +20,8 @@ self.addEventListener('install', event => {
                 '/placeholder.png',
                 '/puzzle-piece.png',
                 '/thought-bubble.png',
-                '/brain-icon.png'
+                '/brain-icon.png',
+                '/app-icon.png'
             ]);
         })
     );
