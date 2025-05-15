@@ -13,14 +13,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const infoPopupButton = document.getElementsByClassName('showInfoPopup')[0];
   const overlay = document.getElementsByClassName('popupOverlay')[0];
 
+  requestAnimationFrame(() => {
+    popup.classList.add('show');
+  });
+
   popupButton.addEventListener('click', () => {
     popup.style.display = 'none';
+    popup.classList.remove('show');
     overlay.classList.add('hidden');
   });
 
   infoPopupButton.addEventListener('click', () => {
     popup.style.display = 'block';
     overlay.classList.remove('hidden');
+
+    void popup.offsetWidth;
+
+    requestAnimationFrame(() => {
+      popup.classList.add('show');
+    });
   });
 });
 

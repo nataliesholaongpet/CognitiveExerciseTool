@@ -51,7 +51,7 @@ h1 {
 }
 
 p {
-    color: #666;
+    color: black;
     text-align: center;
 }
 
@@ -408,7 +408,8 @@ h2 {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -40%);
+    transition: opacity 0.4s ease, transform 0.4s ease;
     background: #34D376;
     color: white;
     padding: 20px 30px;
@@ -418,8 +419,18 @@ h2 {
     text-align: center;
 }
 
+.popup.show {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
 .popup.hidden {
     display: none;
+    pointer-events: none;
+}
+
+.popupText {
+    color: black;
 }
 
 .popupButton {

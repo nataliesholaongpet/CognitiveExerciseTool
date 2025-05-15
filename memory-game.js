@@ -91,14 +91,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const infoPopupButton = document.getElementsByClassName('showInfoPopup')[0];
   const overlay = document.getElementsByClassName('popupOverlay')[0];
 
+  requestAnimationFrame(() => {
+    popup.classList.add('show');
+  });
+
   popupButton.addEventListener('click', () => {
     popup.style.display = 'none';
+    popup.classList.remove('show');
     overlay.classList.add('hidden');
   });
 
   infoPopupButton.addEventListener('click', () => {
     popup.style.display = 'block';
     overlay.classList.remove('hidden');
+
+    void popup.offsetWidth;
+
+    requestAnimationFrame(() => {
+      popup.classList.add('show');
+    });
   });
 });
 
@@ -110,7 +121,12 @@ function showLevelPopup(message, callback) {
   popupText.textContent = message;
   popup.classList.remove('hidden');
 
+  requestAnimationFrame(() => {
+    popup.classList.add('show');
+  });
+
   popupButton.onclick = () => {
+    popup.classList.remove('show');
     popup.classList.add('hidden');
     if (callback) callback();
   };
