@@ -1,6 +1,6 @@
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js', {scope: '/'})
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
             .then(registration => {
                 console.log('Service Worker registered with scope:', registration.scope);
             }).catch(error => {
@@ -177,10 +177,18 @@ document.getElementById('saveReminder').addEventListener('click', () => {
 
         const subscription = await registration.pushManager.subscribe({
             userVisibleOnly: true,
-            applicationServerKey: urlBase64ToUint8Array('YOUR_PUBLIC_VAPID_KEY')
+            applicationServerKey: urlBase64ToUint8Array('BPAz2Rvk6nj4t7cUBaJc3B70ZXOUxfuEoi-LohzpbMbosWwLjBcRRlhq09w_kM2FjYZhPuy6uCE-s3mTu9sq2ig')
         });
 
         console.log('Push Subscription:', subscription);
+
+        await fetch('http://localhost:4000/subscribe', {
+        method: 'POST',
+        body: JSON.stringify(subscription),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
     }
 
     function urlBase64ToUint8Array(base64String) {

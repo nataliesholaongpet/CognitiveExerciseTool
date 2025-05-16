@@ -64,16 +64,3 @@ self.addEventListener('push', event => {
     );
 });
 
-const webpush = require('web-push');
-
-webpush.setVapidDetails(
-  'crownofnatalie@gmail.com',
-  'BPAz2Rvk6nj4t7cUBaJc3B70ZXOUxfuEoi-LohzpbMbosWwLjBcRRlhq09w_kM2FjYZhPuy6uCE-s3mTu9sq2ig',
-  'A5GPCqIVn0j5kLsbTx9uD2DR9OsJnxXBhmi2tkSCVUg'
-);
-
-webpush.sendNotification(subscription, JSON.stringify({
-  title: "Reminder",
-  body: "Don't forget to take your meds!"
-}));
-
