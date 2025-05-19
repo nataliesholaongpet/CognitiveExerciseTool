@@ -22,7 +22,6 @@ app.post('/subscribe', (req, res) => {
   const subscription = req.body;
   subscriptions.push(subscription);
   res.status(201).json({});
-  console.log('New subscription: ', subscription);
 });
 
 app.post('/send', async (req, res) => {
