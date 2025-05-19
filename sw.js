@@ -63,4 +63,3 @@ self.addEventListener('push', event => {
         })
     );
 });
-
