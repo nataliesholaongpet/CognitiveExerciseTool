@@ -22,6 +22,7 @@ app.post('/subscribe', (req, res) => {
   const subscription = req.body;
   subscriptions.push(subscription);
   res.status(201).json({});
+  console.log('New subscription: ', subscription);
 });
 
 app.post('/send', async (req, res) => {
@@ -45,3 +46,24 @@ app.post('/send', async (req, res) => {
 });
 
 app.listen(4000, () => console.log('Push server running on port 4000'));
+
+const reminders = [];
+
+app.post('/reminders', (req, res) => {
+  const { subscription, reminder } = req.body;
+  const delay = new Date(reminder.time).getTime() - Date.now();
+
+  if (delay > 0) {
+    setTimeout(() => {
+      const payload = JSON.stringify({
+        title: reminder.title,
+        body: reminder.body,
+        icon: '/icon.png'
+      });
+
+      webpush.sendNotification(subscription, payload).catch(console.error);
+    }, delay);
+  }
+
+  res.status(201).json({ success: true });
+});

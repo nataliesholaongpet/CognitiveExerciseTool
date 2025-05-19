@@ -166,54 +166,50 @@ function LifestyleTips() {
     )
 }
 
-document.getElementById('saveReminder').addEventListener('click', () => {
+document.getElementById('saveReminder').addEventListener('click', async () => {
     if (!("Notification" in window)) {
         alert("This system does not support push notifications");
         return;
     }
 
-    async function subscribeUserToPush() {
-        const registration = await navigator.serviceWorker.ready;
+    const time = new Date(document.getElementById('reminderTime').value);
+    const text = document.getElementById('reminderText').value;
+    const reminder = {
+        title: 'Lifestyle Reminder',
+        body: text,
+        time: time.toISOString()
+    };
 
-        const subscription = await registration.pushManager.subscribe({
+    const registration = await navigator.serviceWorker.ready;
+
+    const subscription = await registration.pushManager.getSubscription() ||
+        await registration.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: urlBase64ToUint8Array('BPAz2Rvk6nj4t7cUBaJc3B70ZXOUxfuEoi-LohzpbMbosWwLjBcRRlhq09w_kM2FjYZhPuy6uCE-s3mTu9sq2ig')
         });
 
-        console.log('Push Subscription:', subscription);
+    console.log('Push Subscription:', subscription);
 
-        await fetch('http://localhost:4000/subscribe', {
+    await fetch('http://localhost:4000/reminders', {
         method: 'POST',
-        body: JSON.stringify(subscription),
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subscription, reminder })
     });
-    }
-
-    function urlBase64ToUint8Array(base64String) {
-        const padding = '='.repeat((4 - base64String.length % 4) % 4);
-        const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
-        const rawData = window.atob(base64);
-        const outputArray = new Uint8Array(rawData.length);
-        for (let i = 0; i < rawData.length; ++i) {
-            outputArray[i] = rawData.charCodeAt(i);
-        }
-        return outputArray;
-    }
-
-    if (Notification.permission === "granted") {
-        alert("Notifications are already enabled.");
-    } else if (Notification.permission !== "denied") {
-        Notification.requestPermission().then(permission => {
-            if (permission === "granted") {
-                new Notification("Notifications enabled!");
-                subscribeUserToPush();
-            } else {
-                alert("Notifications denied.");
-            }
-        });
-    } else {
-        alert("Notifications are blocked. Please enable them in your app settings.");
-    }
+    
+    const reminders = JSON.parse(localStorage.getItem('reminders') || '[]');
+    reminders.push({ id: Date.now(), ...reminder });
+    localStorage.setItem('reminders', JSON.stringify(reminders));
+    renderReminder(reminder);
+    document.getElementById('reminderForm').style.display = 'none';
 });
+
+function urlBase64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}
