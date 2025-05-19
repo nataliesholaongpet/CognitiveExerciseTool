@@ -24,6 +24,30 @@ app.post('/subscribe', (req, res) => {
   res.status(201).json({});
 });
 
+let reminders = [];
+
+app.post('/reminder', (req, res) => {
+  const { subscription, reminder } = req.body;
+  
+  const delay = new Date(reminder.time).getTime() - Date.now();
+
+  if (delay > 0) {
+    setTimeout(() => {
+      const payload = JSON.stringify({
+        title: 'Lifestyle Reminder',
+        body: reminder.text,
+        icon: '/icon.png',
+      });
+
+      webpush.sendNotification(subscription, payload).catch(err => {
+        console.error('Failed to send push', err);
+      });
+    }, delay);
+  }
+
+  res.status(201).json({ success: true });
+});
+
 app.post('/send', async (req, res) => {
   const notificationPayload = {
     title: 'Reminder',

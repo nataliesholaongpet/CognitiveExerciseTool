@@ -88,16 +88,33 @@ function renderReminder({ time, text }) {
 
 function schedulePushNotification(reminder) {
     const delay = new Date(reminder.time).getTime() - Date.now();
+
     if (delay > 0) {
         setTimeout(() => {
-            if (Notification.permission === 'granted') {
-                navigator.serviceWorker.ready.then(reg => {
-                    reg.showNotification("Lifestyle Reminder", {
+            (async () => {
+                if (Notification.permission === 'granted') {
+                    const reg = await navigator.serviceWorker.ready;
+
+                    await reg.showNotification("Lifestyle Reminder", {
                         body: reminder.text,
                         icon: '/icon.png'
                     });
-                });
-            }
+                    try {
+                        await fetch('http://localhost:4000/send', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                title: "Lifestyle Reminder",
+                                body: reminder.text
+                            })
+                        });
+                    } catch (err) {
+                        console.error("Error sending server push:", err);
+                    }
+                }
+            })();
         }, delay);
     }
 }
