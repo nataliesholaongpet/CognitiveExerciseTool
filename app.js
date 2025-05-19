@@ -100,7 +100,7 @@ function schedulePushNotification(reminder) {
                         icon: '/icon.png'
                     });
                     try {
-                        await fetch('http://localhost:4000/send', {
+                        await fetch('https://localhost:4000/send', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -199,7 +199,7 @@ document.getElementById('saveReminder').addEventListener('click', () => {
 
         console.log('Push Subscription:', subscription);
 
-        await fetch('http://localhost:4000/subscribe', {
+        await fetch('https://localhost:4000/subscribe', {
         method: 'POST',
         body: JSON.stringify(subscription),
         headers: {
