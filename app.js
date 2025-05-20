@@ -107,7 +107,7 @@ function schedulePushNotification(reminder) {
             return;
         }
 
-        await fetch('http://localhost:4000/reminder', {
+        await fetch('https://cognitiveexercisetool.onrender.com/reminder', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ subscription, reminder })
@@ -197,7 +197,7 @@ document.getElementById('saveReminder').addEventListener('click', async () => {
 
             console.log('Push Subscription:', subscription);
 
-            await fetch('http://localhost:4000/subscribe', {
+            await fetch('https://cognitiveexercisetool.onrender.com/subscribe', {
                 method: 'POST',
                 body: JSON.stringify(subscription),
                 headers: {
@@ -234,7 +234,7 @@ document.getElementById('saveReminder').addEventListener('click', async () => {
         const id = Date.now();
         const reminder = { id, time: time.toISOString(), text };
 
-        await fetch('http://localhost:4000/reminder', {
+        await fetch('https://cognitiveexercisetool.onrender.com/reminder', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ subscription, reminder })
