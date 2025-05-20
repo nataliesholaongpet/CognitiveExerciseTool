@@ -44,9 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const reminder = { id, time: time.toISOString(), text };
 
-        saveReminder(reminder);
-        schedulePushNotification(reminder);
-        renderReminder(reminder);
         reminderForm.classList.toggle('hidden');
         saveReminderButton.classList.toggle('hidden');
     });
@@ -102,36 +99,20 @@ function renderReminder({ time, text }) {
 }
 
 function schedulePushNotification(reminder) {
-    const delay = new Date(reminder.time).getTime() - Date.now();
+    navigator.serviceWorker.ready.then(async reg => {
+        const subscription = await reg.pushManager.getSubscription();
 
-    if (delay > 0) {
-        setTimeout(() => {
-            (async () => {
-                if (Notification.permission === 'granted') {
-                    const reg = await navigator.serviceWorker.ready;
+        if (!subscription) {
+            console.error('No push subscription found.');
+            return;
+        }
 
-                    await reg.showNotification("Lifestyle Reminder", {
-                        body: reminder.text,
-                        icon: '/icon.png'
-                    });
-                    try {
-                        await fetch('http://localhost:4000/send', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                title: "Lifestyle Reminder",
-                                body: reminder.text
-                            })
-                        });
-                    } catch (err) {
-                        console.error("Error sending server push:", err);
-                    }
-                }
-            })();
-        }, delay);
-    }
+        await fetch('http://localhost:4000/reminder', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ subscription, reminder })
+        });
+    });
 }
 
 const music = new Audio('all-good-things.mp3');
@@ -198,7 +179,7 @@ function LifestyleTips() {
     )
 }
 
-document.getElementById('saveReminder').addEventListener('click', () => {
+document.getElementById('saveReminder').addEventListener('click', async () => {
     if (!("Notification" in window)) {
         alert("This system does not support push notifications");
         return;
@@ -207,20 +188,26 @@ document.getElementById('saveReminder').addEventListener('click', () => {
     async function subscribeUserToPush() {
         const registration = await navigator.serviceWorker.ready;
 
-        const subscription = await registration.pushManager.subscribe({
-            userVisibleOnly: true,
-            applicationServerKey: urlBase64ToUint8Array('BPAz2Rvk6nj4t7cUBaJc3B70ZXOUxfuEoi-LohzpbMbosWwLjBcRRlhq09w_kM2FjYZhPuy6uCE-s3mTu9sq2ig')
-        });
+        let subscription = await registration.pushManager.getSubscription();
+        if (!subscription) {
+            subscription = await registration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array('BPAz2Rvk6nj4t7cUBaJc3B70ZXOUxfuEoi-LohzpbMbosWwLjBcRRlhq09w_kM2FjYZhPuy6uCE-s3mTu9sq2ig')
+            });
 
-        console.log('Push Subscription:', subscription);
+            console.log('Push Subscription:', subscription);
 
-        await fetch('http://localhost:4000/subscribe', {
-            method: 'POST',
-            body: JSON.stringify(subscription),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+            await fetch('http://localhost:4000/subscribe', {
+                method: 'POST',
+                body: JSON.stringify(subscription),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        } else {
+            console.log('Already subscribed:', subscription);
+        }
+        return subscription;
     }
 
     function urlBase64ToUint8Array(base64String) {
@@ -234,8 +221,28 @@ document.getElementById('saveReminder').addEventListener('click', () => {
         return outputArray;
     }
 
+    let permission = Notification.permission;
+    if (permission === "default") {
+        permission = await Notification.requestPermission();
+    }
+
     if (Notification.permission === "granted") {
-        alert("Notifications are already enabled.");
+        const subscription = await subscribeUserToPush();
+
+        const time = new Date(document.getElementById('reminderTime').value);
+        const text = document.getElementById('reminderText').value;
+        const id = Date.now();
+        const reminder = { id, time: time.toISOString(), text };
+
+        await fetch('http://localhost:4000/reminder', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ subscription, reminder })
+        });
+
+        saveReminder(reminder);
+        renderReminder(reminder);
+
     } else if (Notification.permission !== "denied") {
         Notification.requestPermission().then(permission => {
             if (permission === "granted") {

@@ -36,7 +36,7 @@ app.post('/reminder', (req, res) => {
       const payload = JSON.stringify({
         title: 'Lifestyle Reminder',
         body: reminder.text,
-        icon: '/icon.png',
+        icon: '/app-icon.png',
       });
 
       webpush.sendNotification(subscription, payload).catch(err => {
