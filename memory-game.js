@@ -89,7 +89,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const popup = document.getElementById('infoPopup');
   const popupButton = document.getElementsByClassName('popupButton')[0];
   const infoPopupButton = document.getElementsByClassName('showInfoPopup')[0];
-  const overlay = document.getElementsByClassName('popupOverlay')[0];
+  const overlay = document.getElementById('infoOverlay');
+
+  overlay.classList.remove('hidden');
+  popup.style.display = 'block';
 
   requestAnimationFrame(() => {
     popup.classList.add('show');
@@ -115,11 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function showLevelPopup(message, callback) {
   const popup = document.getElementById('levelPopup');
-  const popupText = document.getElementsByClassName('popupText')[1];
-  const popupButton = document.getElementsByClassName('popupButton')[1];
+  const overlay = document.getElementById('levelOverlay');
+  const popupText = popup.querySelector('.popupText');
+  const popupButton = popup.querySelector('.popupButton');
 
   popupText.textContent = message;
+  overlay.classList.remove('hidden');
   popup.classList.remove('hidden');
+
+  void popup.offsetWidth;
 
   requestAnimationFrame(() => {
     popup.classList.add('show');
@@ -128,9 +135,11 @@ function showLevelPopup(message, callback) {
   popupButton.onclick = () => {
     popup.classList.remove('show');
     popup.classList.add('hidden');
+    overlay.classList.add('hidden');
     if (callback) callback();
   };
 }
+
 
 function advanceDifficulty() {
   if (currentDifficultyIndex < difficulties.length - 1) {

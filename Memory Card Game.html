@@ -19,7 +19,7 @@
             <h1>Memory Card Game</h1>
         </header>
 
-        <div class="popupOverlay">
+        <div id="infoOverlay" class="popupOverlay hidden">
             <div id="infoPopup" class="popup">
                 <p class="popupText">Tap a card to flip it over<br>Match 2 cards to gain a point<br>Match all cards to
                     advance to the next difficulty level</p>
@@ -27,10 +27,13 @@
             </div>
         </div>
 
-        <div id="levelPopup" class="popup hidden">
-            <p class="popupText"></p>
-            <button class="popupButton">OK</button>
+        <div id="levelOverlay" class="popupOverlay hidden">
+            <div id="levelPopup" class="popup hidden">
+                <p class="popupText"></p>
+                <button class="popupButton">OK</button>
+            </div>
         </div>
+
 
         <div class="game-board" id="gameBoard"></div>
         <div class="score-tab">
