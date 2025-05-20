@@ -4,24 +4,24 @@ self.addEventListener('install', event => {
     event.waitUntil(
         caches.open('v5').then(cache => {
             return cache.addAll([
-                '/',
-                '/index.html',
-                '/styles.css',
-                '/app.js',
-                '/manifest.json',
-                '/placeholder-icon.jpg',
-                '/Cognitive%20Exercises.html',
-                '/home.png',
-                '/Lifestyle%20Tips.html',
-                '/lightbulb-icon.png',
-                '/magnifying-glass.png',
-                '/Memory%20Card%20Game.html',
-                '/memory-game.js',
-                '/placeholder.png',
-                '/puzzle-piece.png',
-                '/thought-bubble.png',
-                '/brain-icon.png',
-                '/app-icon.png'
+                '/CognitiveExerciseTool/',
+                '/CognitiveExerciseTool/index.html',
+                '/CognitiveExerciseTool/styles.css',
+                '/CognitiveExerciseTool/app.js',
+                '/CognitiveExerciseTool/manifest.json',
+                '/CognitiveExerciseTool/placeholder-icon.jpg',
+                '/CognitiveExerciseTool/Cognitive Exercises.html',
+                '/CognitiveExerciseTool/home.png',
+                '/CognitiveExerciseTool/Lifestyle Tips.html',
+                '/CognitiveExerciseTool/lightbulb-icon.png',
+                '/CognitiveExerciseTool/magnifying-glass.png',
+                '/CognitiveExerciseTool/Memory Card Game.html',
+                '/CognitiveExerciseTool/memory-game.js',
+                '/CognitiveExerciseTool/placeholder.png',
+                '/CognitiveExerciseTool/puzzle-piece.png',
+                '/CognitiveExerciseTool/thought-bubble.png',
+                '/CognitiveExerciseTool/brain-icon.png',
+                '/CognitiveExerciseTool/app-icon.png'
             ]);
         })
     );
