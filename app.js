@@ -26,9 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const addReminderButton = document.getElementById('addReminderButton');
     const reminderForm = document.getElementById('reminderForm');
+    const saveReminderButton = document.getElementById('saveReminder');
 
     addReminderButton.addEventListener('click', () => {
         reminderForm.classList.toggle('hidden');
+        saveReminderButton.classList.toggle('hidden');
     });
 
     document.getElementById('saveReminder').addEventListener('click', () => {
@@ -44,8 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         saveReminder(reminder);
         schedulePushNotification(reminder);
-        reminderForm.classList.add('hidden');
         renderReminder(reminder);
+        reminderForm.classList.toggle('hidden');
+        saveReminderButton.classList.toggle('hidden');
     });
 });
 
