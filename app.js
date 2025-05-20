@@ -50,6 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
         reminderForm.classList.toggle('hidden');
         saveReminderButton.classList.toggle('hidden');
     });
+
+    document.getElementById('reminderContainer').addEventListener('click', (e) => {
+        if (e.target.classList.contains('delete-reminder')) {
+            const reminderDiv = e.target.closest('.reminder-tab');
+            const id = Number(reminderDiv.dataset.id);
+
+            deleteReminder(id);
+
+            reminderDiv.remove();
+        }
+    });
 });
 
 function saveReminder(reminder) {
@@ -67,6 +78,12 @@ function loadReminders() {
     reminders.forEach(renderReminder);
 }
 
+function deleteReminder(id) {
+    let reminders = JSON.parse(localStorage.getItem('reminders') || '[]');
+    reminders = reminders.filter(reminder => reminder.id !== id);
+    localStorage.setItem('reminders', JSON.stringify(reminders));
+}
+
 function renderReminder({ time, text }) {
     const dateObj = new Date(time);
     const day = String(dateObj.getDate()).padStart(2, '0');
@@ -80,7 +97,7 @@ function renderReminder({ time, text }) {
     const container = document.getElementById('reminderContainer');
     const reminderDiv = document.createElement('div');
     reminderDiv.className = 'reminder-tab';
-    reminderDiv.innerHTML = `<span class="reminder-time"><strong>${formattedDate}</strong> <strong>${formattedTime}</strong></span><hr class="gradient-line"></hr><span class="reminder-text">${text}</span>`;
+    reminderDiv.innerHTML = `<span class="reminder-time"><strong>${formattedDate}</strong> <strong>${formattedTime}</strong></span><hr class="gradient-line"></hr><span class="reminder-text">${text}</span><button class="delete-reminder">🗑️</button>`;
     container.appendChild(reminderDiv);
 }
 
