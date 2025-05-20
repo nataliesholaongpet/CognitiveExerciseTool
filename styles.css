@@ -1,6 +1,6 @@
 header {
     display: flex;
-    background-color: #fbb04c;
+    background-color: #FF9D00;
     width: 100%;
     padding: 15px 0;
     text-align: center;
@@ -98,23 +98,23 @@ a:visited {
 }
 
 #lifestyle-button {
-    background-color: #FD6E6E;
+    background-color: #FF3131;
 }
 
 #lifestyle-button:hover {
-    background-color: #f55a5a;
+    background-color: #FF4444;
 }
 
 #exercises-button {
-    background-color: #65ADF0;
+    background-color: #0084FF;
 }
 
 #exercises-button:hover {
-    background-color: #42a5f5;
+    background-color: #3399FF;
 }
 
 #problem-button {
-    background-color: #6BCF5D;
+    background-color: #55F340;
 }
 
 #problem-button:hover {
@@ -159,7 +159,7 @@ button#lifestyle-tips:hover {
     margin-bottom: 1.479vw;
     margin-top: 1.479vw;
     border-radius: 25px;
-    background-color: #85DCA9;
+    background-color: #85e2a0;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
@@ -210,7 +210,7 @@ h2 {
     width: 80%;
     height: 12vw;
     text-align: center;
-    background-color: #85DCA9;
+    background-color: #85e2a0;
     border-radius: 25px;
     justify-content: flex-start;
     display: flex;
@@ -305,7 +305,7 @@ h2 {
 .music-card {
     height: 22.584vw;
     width: 22.584vw;
-    background-color: #85DCA9;
+    background-color: #85e2a0;
     border-radius: 25px;
     display: flex;
     align-items: center;
