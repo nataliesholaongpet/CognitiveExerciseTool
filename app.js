@@ -21,19 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
     LifestyleTips();
 });
 
-const addReminderButton = document.getElementById('addReminderButton');
-const reminderForm = document.getElementById('reminderForm');
-
-addReminderButton.addEventListener('click', () => {
-    const isVisible = reminderForm.style.display === 'block';
-    reminderForm.style.display = isVisible ? 'none' : 'block';
-});
-
 document.addEventListener('DOMContentLoaded', () => {
     loadReminders();
 
-    document.getElementById('addReminderButton').addEventListener('click', () => {
-        document.getElementById('reminderForm').style.display = 'block';
+    const addReminderButton = document.getElementById('addReminderButton');
+    const reminderForm = document.getElementById('reminderForm');
+
+    addReminderButton.addEventListener('click', () => {
+        reminderForm.classList.toggle('hidden');
     });
 
     document.getElementById('saveReminder').addEventListener('click', () => {
@@ -49,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         saveReminder(reminder);
         schedulePushNotification(reminder);
-        document.getElementById('reminderForm').style.display = 'none';
+        reminderForm.classList.add('hidden');
         renderReminder(reminder);
     });
 });
@@ -200,12 +195,12 @@ document.getElementById('saveReminder').addEventListener('click', () => {
         console.log('Push Subscription:', subscription);
 
         await fetch('http://localhost:4000/subscribe', {
-        method: 'POST',
-        body: JSON.stringify(subscription),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+            method: 'POST',
+            body: JSON.stringify(subscription),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
     }
 
     function urlBase64ToUint8Array(base64String) {

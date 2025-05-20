@@ -242,7 +242,7 @@ h2 {
 }
 
 #reminderForm {
-    display: flex !important;
+    display: flex;
     justify-content: space-between;
     gap: 10px;
     margin-bottom: 20px;
@@ -550,7 +550,7 @@ h2 {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .gradient-line {
