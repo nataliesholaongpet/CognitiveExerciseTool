@@ -453,7 +453,6 @@ h2 {
 }
 
 .showInfoPopup {
-    all: unset;
     width: 4.931vw;
     height: 4.931vw;
     position: absolute;
@@ -467,6 +466,8 @@ h2 {
     transition: transform 0.3s ease, background-color 0.3s ease;
     min-height: 50px;
     min-width: 50px;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .showInfoPopup:hover {
