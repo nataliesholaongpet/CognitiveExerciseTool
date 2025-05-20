@@ -219,6 +219,7 @@ h2 {
 }
 
 #addReminderButton {
+    all: unset;
     width: 7.89vw;
     height: 7.89vw;
     font-family: "Inter", Verdana, sans-serif;
@@ -229,6 +230,15 @@ h2 {
     margin: 5px;
     font-weight: bold;
     margin: 20px;
+    text-decoration: none;
+    -webkit-appearance: none; 
+    appearance: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    text-align: center;
 }
 
 #reminderForm {
