@@ -94,7 +94,7 @@ function renderReminder({ time, text }) {
     const container = document.getElementById('reminderContainer');
     const reminderDiv = document.createElement('div');
     reminderDiv.className = 'reminder-tab';
-    reminderDiv.innerHTML = `<span class="reminder-time"><strong>${formattedDate}</strong> <strong>${formattedTime}</strong></span><hr class="gradient-line"></hr><span class="reminder-text">${text}</span><button class="delete-reminder"><img src="bin.png" class="delete-icon" alt="Delete reminder"</button>`;
+    reminderDiv.innerHTML = `<span class="reminder-time"><strong>${formattedDate}</strong> <strong>${formattedTime}</strong></span></div><hr class="gradient-line"></hr><span class="reminder-text">${text}</span><button class="delete-reminder"><img src="bin.png" class="delete-icon" alt="Delete reminder"</button>`;
     container.appendChild(reminderDiv);
 }
 
@@ -154,7 +154,7 @@ progressBar.addEventListener('input', () => {
 
 // lifestyle tips section
 function LifestyleTips() {
-    const tips = ["Placeholder 1", "Placeholder 2", "Placeholder 3"];
+    const tips = ["Do you need to take any medication?", "Do something that makes you happy today!", "It's important to get at least 30 minutes of physical activity in per day", "It can help to write notes and to-do lists", "Music can help bring back memories", "Have you talked to a loved one recently?", "It's important to socialise regularly", "Do you have any chores you need to do?", "Remember to take a walk today!"];
     const tipButton = document.getElementById('tipButton');
     const tipText = document.getElementById('tipText');
     const speakButton = document.getElementById('speakButton');
