@@ -372,21 +372,21 @@ h2 {
 .game-board {
     display: grid;
     grid-template-columns: repeat(4, 80px);
-    grid-gap: 10px;
+    grid-gap: 30px;
     position: absolute;
     top: 25%;
     margin-top: 1.972vw;
 }
 
 .card {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     background: #8EF580;
     border-radius: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
+    font-size: 3rem;
     cursor: pointer;
     -webkit-user-select: none;
     user-select: none;
