@@ -2,6 +2,9 @@ const express = require('express');
 const webpush = require('web-push');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const fs = require('fs');
+const cron = require('node-cron');
+const path = require('path');
 
 const app = express();
 app.use(cors());
@@ -16,34 +19,47 @@ webpush.setVapidDetails(
   privateVapidKey
 );
 
-let subscriptions = []; 
+const reminder_file = path.join(__dirname, 'reminders.json');
+const subscription_file = path.join(__dirname, 'subscriptions.json');
+
+function loadJSON(file) {
+  try {
+    return JSON.parse(fs.readFileSync(file));
+  } catch {
+    return [];
+  }
+}
+
+function saveJSON(file, data) {
+  fs.writeFileSync(file, JSON.stringify(data, null, 2));
+}
+
+let reminders = loadJSON(reminder_file);
+let subscriptions = loadJSON(subscription_file);
 
 app.post('/subscribe', (req, res) => {
   const subscription = req.body;
-  subscriptions.push(subscription);
+
+  if (!subscriptions.find(sub => JSON.stringify(sub) === JSON.stringify(subscription))) {
+    subscriptions.push(subscription);
+    saveJSON(subscription_file, subscriptions);
+  }
+
   res.status(201).json({});
 });
 
-let reminders = [];
-
 app.post('/reminder', (req, res) => {
   const { subscription, reminder } = req.body;
-  
-  const delay = new Date(reminder.time).getTime() - Date.now();
 
-  if (delay > 0) {
-    setTimeout(() => {
-      const payload = JSON.stringify({
-        title: 'Lifestyle Reminder',
-        body: reminder.text,
-        icon: '/app-icon.png',
-      });
+    const newReminder = {
+    id: Date.now(),
+    time: reminder.time,
+    text: reminder.text,
+    subscription
+  };
 
-      webpush.sendNotification(subscription, payload).catch(err => {
-        console.error('Failed to send push', err);
-      });
-    }, delay);
-  }
+  reminders.push(newReminder);
+  saveJSON(reminder_file, reminders);
 
   res.status(201).json({ success: true });
 });
@@ -66,6 +82,25 @@ app.post('/send', async (req, res) => {
     console.error('Push Error:', error);
     res.sendStatus(500);
   }
+});
+
+cron.schedule('* * * * *', () => {
+  const now = Date.now();
+
+  const dueReminders = reminders.filter(r => new Date(r.time).getTime() <= now);
+
+  for (const reminder of dueReminders) {
+    const payload = JSON.stringify({
+      title: 'Lifestyle Reminder',
+      body: reminder.text,
+      icon: '/CognitiveExerciseTool/app-icon.png'
+    });
+
+    webpush.sendNotification(reminder.subscription, payload).catch(console.error);
+  }
+
+  reminders = reminders.filter(r => new Date(r.time).getTime() > now);
+  saveJSON(reminder_file, reminders);
 });
 
 app.listen(4000, () => console.log('Push server running on port 4000'));
