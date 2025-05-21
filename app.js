@@ -81,7 +81,7 @@ function deleteReminder(id) {
     localStorage.setItem('reminders', JSON.stringify(reminders));
 }
 
-function renderReminder({ time, text }) {
+function renderReminder({ id, time, text }) {
     const dateObj = new Date(time);
     const day = String(dateObj.getDate()).padStart(2, '0');
     const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
@@ -94,6 +94,7 @@ function renderReminder({ time, text }) {
     const container = document.getElementById('reminderContainer');
     const reminderDiv = document.createElement('div');
     reminderDiv.className = 'reminder-tab';
+    reminderDiv.dataset.id = id;
     reminderDiv.innerHTML = `<span class="reminder-time"><strong>${formattedDate}</strong> <strong>${formattedTime}</strong></span></div><hr class="gradient-line"></hr><span class="reminder-text">${text}</span><button class="delete-reminder"><img src="bin.png" class="delete-icon" alt="Delete reminder"</button>`;
     container.appendChild(reminderDiv);
 }
