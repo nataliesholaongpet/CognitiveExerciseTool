@@ -231,7 +231,7 @@ h2 {
     font-weight: bold;
     margin: 20px;
     text-decoration: none;
-    -webkit-appearance: none; 
+    -webkit-appearance: none;
     appearance: none;
     cursor: pointer;
     box-sizing: border-box;
@@ -430,8 +430,8 @@ h2 {
 }
 
 .popup.show {
-  opacity: 1;
-  transform: translate(-50%, -50%);
+    opacity: 1;
+    transform: translate(-50%, -50%);
 }
 
 .popup.hidden {
@@ -463,10 +463,10 @@ h2 {
 }
 
 .showInfoPopup {
-    all: unset; 
+    all: unset;
     display: flex;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
     width: 4.931vw;
     height: 4.931vw;
     min-height: 50px;
@@ -482,7 +482,7 @@ h2 {
     color: black;
     text-decoration: none;
     transition: transform 0.3s ease, background-color 0.3s ease;
-    -webkit-appearance: none; 
+    -webkit-appearance: none;
     appearance: none;
     cursor: pointer;
     box-sizing: border-box;
@@ -562,4 +562,14 @@ h2 {
 .control-buttons {
     width: 4vw;
     height: 4vw;
+}
+
+.delete-reminder {
+    background-color: transparent;
+    border: none;
+}
+
+.delete-icon {
+    width: 4.931vw;
+    height: 4.931vw;
 }

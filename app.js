@@ -94,7 +94,7 @@ function renderReminder({ time, text }) {
     const container = document.getElementById('reminderContainer');
     const reminderDiv = document.createElement('div');
     reminderDiv.className = 'reminder-tab';
-    reminderDiv.innerHTML = `<span class="reminder-time"><strong>${formattedDate}</strong> <strong>${formattedTime}</strong></span><hr class="gradient-line"></hr><span class="reminder-text">${text}</span><button class="delete-reminder">🗑️</button>`;
+    reminderDiv.innerHTML = `<span class="reminder-time"><strong>${formattedDate}</strong> <strong>${formattedTime}</strong></span><hr class="gradient-line"></hr><span class="reminder-text">${text}</span><button class="delete-reminder"><img src="bin.png" class="delete-icon" alt="Delete reminder"</button>`;
     container.appendChild(reminderDiv);
 }
 
