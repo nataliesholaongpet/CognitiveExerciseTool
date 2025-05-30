@@ -5,6 +5,19 @@ header {
     padding: 15px 0;
     text-align: center;
     align-items: center;
+    justify-content: space-between;
+}
+
+a.reference-button {
+    color: black;
+    background: white;
+    text-decoration: none;
+    margin-right: 4vw;
+    padding: 1vw;
+    border-radius: 25px;
+    color: black;
+    background: white;
+    text-decoration: none;
 }
 
 body {
